@@ -1,0 +1,382 @@
+/* Reset & layout cơ bản */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+}
+
+/* Container chính với viền bo cong */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 20px auto;
+  position: relative;
+  border: 2px solid #00821D;
+  border-radius: 50px;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* Phần tiêu đề THÀNH TÍCH */
+.header-title {
+  position: relative;
+  height: 50px;
+  margin-bottom: -25px;
+  z-index: 10;
+}
+
+.title-pill {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 10px 80px;
+  border: 2px solid #f2f5f2;
+  border-radius: 50px;
+}
+
+.title-pill h1 {
+  font-size: 36px;
+  color: #00821D;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Section Thành Tích */
+.thanh-tich {
+  width: 100%;
+  position: relative;
+}
+
+/* Ẩn radio */
+input[name="slider"] {
+  display: none;
+}
+
+/* Slider container */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+}
+
+/* Wrapper slide */
+.slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Mỗi slide */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+  z-index: 0;
+}
+
+/* Ảnh chính */
+.slide .main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hiển thị slide khi radio tương ứng checked */
+#slide1:checked ~ .slider .slides .s1,
+#slide2:checked ~ .slider .slides .s2,
+#slide3:checked ~ .slider .slides .s3,
+#slide4:checked ~ .slider .slides .s4 {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Wrapper cho content để sắp xếp layout */
+.content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 80px;
+  z-index: 2;
+}
+
+/* Phần nội dung (title + desc) */
+.slide .info {
+  max-width: 550px;
+  padding-top: 50px;
+}
+
+/* Tiêu đề */
+.slide .info h2 {
+  font-size: 72px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Mô tả */
+.slide .info p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #fff;
+  margin-bottom: 30px;
+  max-width: 95%;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Nút xem thêm */
+.btn-more {
+  display: inline-block;
+  background: #00821D;
+  color: white;
+  padding: 12px 40px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 22px;
+  transition: background-color 0.3s;
+}
+
+.btn-more:hover {
+  background: #006617;
+}
+
+/* Ảnh thumbnail */
+.thumbnail {
+  width: 500px;
+  height: 300px;
+  border: 5px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  margin-top: 50px;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Điểm tròn điều hướng */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  z-index: 3;
+}
+
+.dots label {
+  width: 14px;
+  height: 14px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dots label:hover {
+  background: rgba(255,255,255,0.7);
+}
+
+#slide1:checked ~ .slider .dots label[for="slide1"],
+#slide2:checked ~ .slider .dots label[for="slide2"],
+#slide3:checked ~ .slider .dots label[for="slide3"],
+#slide4:checked ~ .slider .dots label[for="slide4"] {
+  background: #00821D;
+  transform: scale(1.3);
+}
+
+/* Overlay gradient cho ảnh */
+.slide::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.4) 40%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .content-wrapper {
+    padding: 0 60px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .slide .info {
+    max-width: 90%;
+  }
+  
+  .slide .info h2 {
+    font-size: 60px;
+  }
+  
+  .thumbnail {
+    width: 400px;
+    height: 240px;
+    margin-top: 30px;
+  }
+  
+  .slider {
+    height: 550px;
+  }
+}
+
+@media (max-width: 900px) {
+  .content-wrapper {
+    padding: 0 40px;
+  }
+  
+  .slide .info h2 {
+    font-size: 48px;
+  }
+  
+  .slide .info p {
+    font-size: 16px;
+  }
+  
+  .thumbnail {
+    width: 350px;
+    height: 210px;
+    margin-top: 20px;
+  }
+  
+  .btn-more {
+    padding: 10px 30px;
+    font-size: 18px;
+  }
+  
+  .slider {
+    height: 500px;
+  }
+  
+  .title-pill h1 {
+    font-size: 30px;
+  }
+  
+  .title-pill {
+    padding: 8px 60px;
+  }
+  
+  .container {
+    border-radius: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: 0 30px;
+  }
+  
+  .slide .info h2 {
+    font-size: 42px;
+  }
+  
+  .thumbnail {
+    width: 300px;
+    height: 180px;
+  }
+  
+  .slider {
+    height: 450px;
+  }
+  
+  .title-pill h1 {
+    font-size: 26px;
+  }
+  
+  .title-pill {
+    padding: 8px 50px;
+  }
+  
+  .container {
+    border-radius: 30px;
+    margin: 15px auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .content-wrapper {
+    padding: 0 20px;
+  }
+  
+  .slide .info h2 {
+    font-size: 36px;
+  }
+  
+  .slide .info p {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  .thumbnail {
+    width: 250px;
+    height: 150px;
+  }
+  
+  .btn-more {
+    padding: 8px 24px;
+    font-size: 16px;
+  }
+  
+  .slider {
+    height: 400px;
+  }
+  
+  .container {
+    border-radius: 25px;
+    margin: 10px;
+    width: calc(100% - 20px);
+  }
+  
+  .title-pill h1 {
+    font-size: 22px;
+  }
+  
+  .title-pill {
+    padding: 6px 40px;
+  }
+  
+  .dots {
+    bottom: 20px;
+  }
+  
+  .dots label {
+    width: 12px;
+    height: 12px;
+  }
+}
